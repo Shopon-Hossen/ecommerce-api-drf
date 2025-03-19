@@ -1,0 +1,25 @@
+# Python virtual environment
+.venv/
+
+# Environment variables
+.env
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs
+*.log
+mails.txt
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Deployment database
+*.sqlite3
