@@ -12,7 +12,7 @@ urlpatterns = [
     path('verify-email/<str:token>/',
          views.VerifyEmailView.as_view(), name='verify-email'),
 
-    path('token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
+    path('login/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
     path('update/', views.UpdateUserView.as_view(), name='update-user'),
