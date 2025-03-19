@@ -7,6 +7,7 @@ from .models import User
 import os
 
 
+# just for development purpose only.
 def send_mail(*args):
     with open(os.path.join(settings.BASE_DIR, "mails.txt"), "w") as file:
         file.write(" ".join(map(str, args)))

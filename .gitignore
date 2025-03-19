@@ -21,5 +21,8 @@ mails.txt
 .vscode/
 .idea/
 
-# Deployment database
+# Development databases
 *.sqlite3
+
+# Development display_picture
+dp/

@@ -11,10 +11,28 @@ from .serializers import UserSerializer
 signer = TimestampSigner()
 
 
+class UpdateUserView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        """Get the current user's details."""
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+    def patch(self, request):
+        """Update the current user's profile (excluding password)."""
+        serializer = UserSerializer(
+            request.user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
 class CreateUserView(APIView):
-    permission_classes = (permissions.AllowAny, )
-    
+    permission_classes = [permissions.AllowAny]
+
     def post(self, request):
+        """Create a new user with is_active=False"""
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -27,6 +45,8 @@ class VerifyEmailView(APIView):
 
     def get(self, request, token):
         try:
+            """Verify email address for user"""
+            # decode the user id/pk.
             user_pk = signer.unsign(token, max_age=3600)
             user = User.objects.get(pk=user_pk)
             user.is_active = True  # Activate the user

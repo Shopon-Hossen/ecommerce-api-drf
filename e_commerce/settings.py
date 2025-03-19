@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 from decouple import config
 
@@ -122,8 +123,6 @@ EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = '2525'
-
-
 SITE_URL = 'http://localhost:8000'  # Change as needed
 DEFAULT_FROM_EMAIL = 'shoponhossen@example.com'
 
@@ -133,3 +132,20 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+
+SIMPLE_JWT = {
+    # Change this on production. eg: minutes = 5
+    'ACCESS_TOKEN_LIFETIME': timedelta(weeks=1),
+    # Change this on production. eg: days = 30
+    'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1),
+}
+
+
+# Media files (User-uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Default profile image URL
+DEFAULT_PROFILE_IMAGE_URL = "image/default_dp.jpg"
