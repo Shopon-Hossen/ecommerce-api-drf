@@ -59,3 +59,15 @@ class VerifyEmailView(APIView):
             return Response({"message": "Invalid verification token."}, status=400)
         except User.DoesNotExist:
             return Response({"message": "User not found."}, status=400)
+
+from django.shortcuts import get_object_or_404
+
+
+class UserProfileView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, pk):
+        """Get a specific user's details"""
+        user = get_object_or_404(User, id=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)

@@ -41,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verify = models.BooleanField(default=False)
 
     display_picture = models.ImageField(
-        default=settings.DEFAULT_PROFILE_IMAGE_URL, blank=True, null=True, upload_to="image/dp/"
+        default=settings.DEFAULT_PROFILE_IMAGE_URL, upload_to="image/dp/"
     )
 
     # Set email as the USERNAME_FIELD

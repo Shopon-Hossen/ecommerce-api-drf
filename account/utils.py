@@ -27,4 +27,6 @@ def send_verification_email(user: User):
     subject = 'Verify Your Email Address'
     message = f'Hi {user.first_name},\nVerifications URL:\n{verify_url}'
 
+    print(f"Verify URL: {verify_url}")
+
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
