@@ -1,4 +1,3 @@
-# accounts/views.py
 from .utils import send_verification_email
 from django.shortcuts import get_object_or_404
 from django.core.signing import BadSignature, SignatureExpired, TimestampSigner

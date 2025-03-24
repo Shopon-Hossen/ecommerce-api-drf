@@ -21,9 +21,10 @@ mails.txt
 .vscode/
 .idea/
 
-# Development databases
+# Development
 *.sqlite3
 
-# Development display_picture
 dp/*
 !.gitkeep
+
+project_context.md
