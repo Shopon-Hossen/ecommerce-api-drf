@@ -17,11 +17,10 @@ signer = TimestampSigner()
 
 
 def send_verification_email(user: User):
-    # Create a token that encodes the user’s primary key
     token = signer.sign(user.pk)
 
     # Build the verification URL. Ensure SITE_URL is set in settings (e.g., "http://localhost:8000")
-    verify_path = reverse('verify-email', kwargs={'token': token})
+    verify_path = reverse('email-verify', kwargs={'token': token})
     verify_url = f"{settings.SITE_URL}{verify_path}"
 
     subject = 'Verify Your Email Address'

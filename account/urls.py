@@ -8,15 +8,13 @@ from rest_framework_simplejwt.views import (
 
 
 urlpatterns = [
-    path('create/', views.CreateUserView.as_view(), name='create-user'),
-    path('verify-email/<str:token>/',
-         views.VerifyEmailView.as_view(), name='verify-email'),
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('login/', TokenObtainPairView.as_view(), name='login'),
+    path('login/silent/', TokenRefreshView.as_view(), name='login-silent'),
+    path('update/', views.UpdateView.as_view(), name='update'),
+    path('update/password/', views.PasswordUpdateView.as_view(), name='update-password'),
+    path('reset/password/', views.PasswordResetView.as_view(), name='reset-password'),
 
-    path('login/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
-
-    path('profile/<int:pk>/', views.UserProfileView.as_view(), name='profile-user'),
-    path('update/', views.UpdateUserView.as_view(), name='update-user'),
-
-    path('password/change/', views.PasswordChangeView.as_view(), name='password-change'),
+    path('profile/<int:pk>/', views.ProfileView.as_view(), name='profile'),
+    path('email/verify/<str:token>/', views.VerifyEmailView.as_view(), name='email-verify'),
 ]

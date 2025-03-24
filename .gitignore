@@ -27,6 +27,3 @@ mails.txt
 # Development display_picture
 dp/*
 !.gitkeep
-
-# Client
-client.py

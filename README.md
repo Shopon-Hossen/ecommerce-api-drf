@@ -54,6 +54,7 @@ python generate_secret_key.py
 ```
 
 ```
+# filename: .env
 SECRET_KEY = "<SECRET_KEY>"
 EMAIL_HOST_USER = "<EMAIL_HOST_USER>"
 EMAIL_HOST_PASSWORD = "<EMAIL_HOST_PASSWORD>"
@@ -82,17 +83,13 @@ python manage.py runserver
 
 ## 🔥 API Endpoints
 
-| Method | Endpoint                        | Description                                 | Authentication |
-| ------ | ------------------------------- | ------------------------------------------- | -------------- |
-| POST   | `/api/accounts/register/`       | Register a new user                         | ❌ No          |
-| POST   | `/api/accounts/login/`          | Log in and get a token                      | ❌ No          |
-| GET    | `/api/accounts/profile/<pk>/`   | Get user profile                            | ✅ Yes         |
-| PATCH  | `/api/accounts/update/`         | Update user details (except email/password) | ✅ Yes         |
-| GET    | `/api/accounts/verify/<token>/` | Verify email                                | ❌ No          |
+```python
+python list_urls.py
+```
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Structure [ Overview ]
 
 ```
 e_commerce/
@@ -127,11 +124,12 @@ e_commerce/
 
 ## ✅ To-Do List
 
+- [x] Add account apps ✅
+- [ ] Prevent to upload large files
 - [ ] Add product models and endpoints
 - [ ] Implement cart and checkout functionality
 
 ---
-
 
 ## 📜 License
 
@@ -140,8 +138,8 @@ This project is open-source showcase project no license are applied.
 ---
 
 ## 📧 Contact
-For questions, feel free to reach out!
 
+For questions, feel free to reach out!
 
 ## **👤 Author**
 
