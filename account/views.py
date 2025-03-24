@@ -1,4 +1,5 @@
 # accounts/views.py
+from django.shortcuts import get_object_or_404
 from django.core.signing import BadSignature, SignatureExpired, TimestampSigner
 from .models import User
 from rest_framework.response import Response
@@ -60,8 +61,6 @@ class VerifyEmailView(APIView):
         except User.DoesNotExist:
             return Response({"message": "User not found."}, status=400)
 
-from django.shortcuts import get_object_or_404
-
 
 class UserProfileView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -71,3 +70,20 @@ class UserProfileView(APIView):
         user = get_object_or_404(User, id=pk)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+
+class PasswordChangeView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        """Change the current user's password"""
+        old_password = request.data.get('old_password')
+        new_password = request.data.get('new_password')
+        user = request.user
+
+        if not user.check_password(old_password):
+            return Response({"error": "Old password is incorrect."}, status=400)
+
+        user.set_password(new_password)
+        user.save()
+        return Response({"success": True, "message": "Password changed successfully."}, status=200)

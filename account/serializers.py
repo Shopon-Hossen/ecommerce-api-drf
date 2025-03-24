@@ -32,3 +32,4 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Email cannot be changed.")
 
         return super().update(instance, validated_data)
+

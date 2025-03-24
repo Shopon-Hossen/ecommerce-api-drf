@@ -25,4 +25,8 @@ mails.txt
 *.sqlite3
 
 # Development display_picture
-dp/
+dp/*
+!.gitkeep
+
+# Client
+client.py
