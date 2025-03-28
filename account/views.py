@@ -35,13 +35,14 @@ class UpdateView(APIView):
     def patch(self, request):
         """Update the current user's profile (excluding password)."""
         serializer = UserSerializer(
-            request.user, data=request.data, partial=True)
+            request.user, data=request.data, partial=True
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"success": True, "data": serializer.data})
 
 
-class VerifyEmailView(APIView):
+class ReceiveVerificationView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request, token):
@@ -50,17 +51,16 @@ class VerifyEmailView(APIView):
             # decode the user id/pk.
             new_password = request.data.get('new_password')
             user_pk = signer.unsign(token, max_age=3600)
-            user = User.objects.get(pk=user_pk)
+            user = get_object_or_404(User, pk=user_pk)
             response_message = "Nothing was changed"
 
             if not new_password:
-                user.is_active = True # Activate the user
+                user.is_active = True  # Activate the user
                 response_message = "Account activated successfully. now you can login."
 
             elif new_password and user.is_active:
-                user.set_password(new_password) # Set the new password
+                user.set_password(new_password)  # Set the new password
                 response_message = "Password changed successfully. now you can login with new password."
-
 
             user.save()
             return Response({"success": True, "message": "Email verified successfully", "response_message": response_message}, status=201)
@@ -69,8 +69,17 @@ class VerifyEmailView(APIView):
             return Response({"message": "Verification link has expired."}, status=400)
         except BadSignature:
             return Response({"message": "Invalid verification token."}, status=400)
-        except User.DoesNotExist:
-            return Response({"message": "User not found."}, status=400)
+
+
+class SendVerificationView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        """Resend the verification email for a user"""
+        email = request.data.get('email')
+        user = get_object_or_404(User, email=email)
+        send_verification_email(user)
+        return Response({"success": True, "message": "Verification email resent successfully."}, status=200)
 
 
 class ProfileView(APIView):
@@ -98,16 +107,3 @@ class PasswordUpdateView(APIView):
         user.set_password(new_password)
         user.save()
         return Response({"success": True, "message": "Password changed successfully."}, status=200)
-
-
-class PasswordResetView(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    def post(self, request):
-        """Reset the password for a user"""
-        email = request.data.get('email')
-        user = get_object_or_404(User, email=email)
-
-        send_verification_email(user)
-
-        return Response({"success": True, "message": "Check your email to reset your password."}, status=200)

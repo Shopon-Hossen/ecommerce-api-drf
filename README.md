@@ -125,7 +125,8 @@ e_commerce/
 ## ✅ To-Do List
 
 - [x] Add account apps ✅
-- [ ] Prevent to upload large files
+- [x] Prevent to upload large files ✅
+- [ ] Add shop models and endpoints
 - [ ] Add product models and endpoints
 - [ ] Implement cart and checkout functionality
 
@@ -144,4 +145,4 @@ For questions, feel free to reach out!
 ## **👤 Author**
 
 - **[Shopon Hossen](https://github.com/Shopon-Hossen)**
-- **[Shopon-Hossen/ECommerce-API](https://github.com/Shopon-Hossen/ecommerce-api-drf)**
+- **[Shopon Hossen/ECommerce-API](https://github.com/Shopon-Hossen/ecommerce-api-drf)**

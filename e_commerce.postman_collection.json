@@ -109,13 +109,14 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"first_name\": \"1\",\r\n    \"last_name\": \"Example\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "display_picture",
+									"type": "file",
+									"src": "/D:/Photo/logos/Postgresql.png"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{base_url}}/account/update/",
@@ -138,7 +139,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"old_password\": \"1\",\r\n    \"new_password\": \"2\"\r\n}",
+							"raw": "{\r\n    \"old_password\": \"3\",\r\n    \"new_password\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,38 +154,6 @@
 							"path": [
 								"account",
 								"update",
-								"password",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "reset-password",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"example1@example.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/account/reset/password/",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"account",
-								"reset",
 								"password",
 								""
 							]
@@ -228,7 +197,38 @@
 					"response": []
 				},
 				{
-					"name": "email-verify",
+					"name": "send-verification",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"example1@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/account/verify/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account",
+								"verify",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "receive-verification",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -245,16 +245,170 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/account/email/verify/<str:token>/",
+							"raw": "{{base_url}}/account/verify/<str:token>/",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"account",
-								"email",
 								"verify",
 								"<str:token>",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shop",
+			"item": [
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/shop/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"shop",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Shop 2\",\r\n    \"description\": \"shop 2\",\r\n    \"location\": \"Bangladesh\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/shop/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"shop",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "shop",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/search/shop/?name=shop&location=Bangladesh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"search",
+								"shop",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "shop"
+								},
+								{
+									"key": "location",
+									"value": "Bangladesh"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "advance shop",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/search/shop/advance/?location=ka",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"search",
+								"shop",
+								"advance",
+								""
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "ka"
+								}
 							]
 						}
 					},

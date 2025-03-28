@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 import os
+from .image_utils import save_dp_image
 
 
 class CustomUserManager(BaseUserManager):
@@ -40,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verify = models.BooleanField(default=False)
 
     display_picture = models.ImageField(
-        default=settings.DEFAULT_PROFILE_IMAGE_URL, upload_to="image/dp/"
+        default=settings.DEFAULT_PROFILE_IMAGE, upload_to="image/dp/"
     )
 
     # Set email as the USERNAME_FIELD
@@ -53,38 +54,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def save(self, *args, **kwargs):
-        # Process the image only if a custom image is provided (not the default)
-        if self.display_picture and self.display_picture.name != settings.DEFAULT_PROFILE_IMAGE_URL:
-            from PIL import Image
+        # If the instance already exists, check if the display_picture has changed.
+        if self.pk:
+            old = type(self).objects.get(pk=self.pk)
+            # If the image file has not changed, skip the image processing logic.
+            if old.display_picture.name == self.display_picture.name:
+                return super().save(*args, **kwargs)
 
-            # Save the model first to ensure we have an ID and the image is available on disk.
+        # If a custom image is provided (and it's not the default image)
+        if self.display_picture and self.display_picture.name != settings.DEFAULT_PROFILE_IMAGE:
+            # First, save the instance so that the file is available on disk.
             super().save(*args, **kwargs)
 
-            # Open the uploaded image.
-            img = Image.open(self.display_picture.path)
+            # Process the image (save as JPEG and delete the original)
+            save_dp_image(self)
 
-            # Convert to RGB if it's not already.
-            if img.mode != 'RGB':
-                img = img.convert('RGB')
-
-            # Generate a new filename based on the user's email and ID.
-            filename = f'{self.email}_{self.id}.jpg'
-            new_path = os.path.join('image/dp/', filename)
-
-            # Save the image as a JPEG (you can add additional compression parameters here).
-            img.save(os.path.join(settings.MEDIA_ROOT, new_path), 'JPEG')
-
-            # Delete the originally uploaded image.
-            if os.path.isfile(self.display_picture.path):
-                os.remove(self.display_picture.path)
-
-            # Update the model to point to the new processed image.
-            self.display_picture.name = new_path
+            # Save the updated image field (with new relative path)
             super().save(update_fields=['display_picture'])
-
         else:
-            # If no image is provided, or if it is the default image,
-            # explicitly set the display_picture to the default.
+            # If no image is provided, or if it is the default image, explicitly set it.
             if not self.display_picture:
-                self.display_picture = settings.DEFAULT_PROFILE_IMAGE_URL
+                self.display_picture = settings.DEFAULT_PROFILE_IMAGE
             super().save(*args, **kwargs)
+

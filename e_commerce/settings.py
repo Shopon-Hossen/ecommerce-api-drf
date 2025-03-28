@@ -2,6 +2,14 @@ from datetime import timedelta
 from pathlib import Path
 from decouple import config
 
+
+ENV_STATUS = config("ENV_STATUS")
+if ENV_STATUS:
+    print(ENV_STATUS)
+else:
+    print("WARNING: Development environment variable are not loaded successfully!")
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "account",
+    "shop",
+    "search",
 ]
 
 MIDDLEWARE = [
@@ -66,9 +76,9 @@ WSGI_APPLICATION = 'e_commerce.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "e_commerce.sqlite3"
     }
 }
 
@@ -130,7 +140,9 @@ DEFAULT_FROM_EMAIL = 'shoponhossen@example.com'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
 }
 
 
@@ -148,4 +160,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default profile image URL
-DEFAULT_PROFILE_IMAGE_URL = "image/default_dp.jpg"
+DEFAULT_PROFILE_IMAGE = "image/default_dp.jpg"
+DEFAULT_SHOP_LOGO_IMAGE = DEFAULT_PROFILE_IMAGE
+DEFAULT_SHOP_BANNER_IMAGE = DEFAULT_SHOP_LOGO_IMAGE

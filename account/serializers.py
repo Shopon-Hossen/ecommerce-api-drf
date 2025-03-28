@@ -13,6 +13,12 @@ class UserSerializer(serializers.ModelSerializer):
         # User cannot change their password and email
         extra_kwargs = {'password': {'write_only': True}}
 
+    def validate_display_picture(self, value):
+        max_size_bytes = 1 * 1024 * 1024  # 1MB
+        if value.size > max_size_bytes:
+            raise serializers.ValidationError("Image cannot be larger than 1MB.")
+        return value
+
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         user.is_active = False  # Disable login until email is verified
