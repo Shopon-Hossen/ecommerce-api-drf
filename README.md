@@ -1,6 +1,6 @@
 # 🛒 E-Commerce API (Django Rest Framework)
 
-This is a backend API for an e-commerce platform built using Django Rest Framework (DRF). It provides authentication, user profile management, image handling, and more.
+This is a backend API for an e-commerce platform built using Django Rest Framework (DRF). It provides authentication, user profile management, image handling, Postgres Database, advance search with pg_trgm, shop management and more.
 
 ## 📌 Features
 
@@ -17,69 +17,115 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
   - Old profile pictures are overwritten on update.
 
 - **Image Handling**
+
   - Images are stored locally.
   - Default profile picture when no image is provided.
-  - Images larger than **2MB** are compressed. **(👩‍💻 In development)**
-  - Prevents super high-resolution images. **(👩‍💻 In development)**
+  - Images larger than **2MB** are compressed.
+  - Prevents super high-resolution images.
+
+- **Shop Management**
+  - Create, Read, Update, Delete (CRUD) shops.
+  - Search shops.
+  - Fuzzy Search shops (Typo correction, best match first).
 
 ## 🚀 Installation & Setup
 
-### 1️⃣ Clone the Repository
+### Install PostgreSQL if not installed
+
+On `Linux` use APT to install PostgreSQL
+```bash
+apt install postgresql
+```
+
+This blog may help you.
+[`Linux downloads (Ubuntu)`](https://www.postgresql.org/download/linux/ubuntu/)
+
+
+On `Windows` download PostgreSQL and install it
+
+This blog may help you.
+[`Windows Postgres Install`](https://www.w3schools.com/postgresql/postgresql_install.php)
+
+
+
+### Create PostgreSQL Database
+
+Create a postgresql database with name of `e_commerce`. why `e_commerce`? A: it must be same name as in your `settings.py > DATABASES > default > NAME`
+
+Once you have created the database now you need to install an PostgreSQL extension named `pg_trgm`. why need to install this extension? A: it help us to improve search functionality and performance.
+
+To install `pg_trgm` extension first connect to `e_commerce` database. to do that run this command on `psql`
+
+```bash
+\c e_commerce
+```
+
+Once connected to the `e_commerce` database install the `pg_trgm` extension by running following command on `psql`
+
+```bash
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+```
+
+
+### Clone the Repository
 
 ```bash
 git clone https://github.com/Shopon-Hossen/ecommerce-api-drf.git e_commerce
 cd e_commerce
 ```
 
-### 2️⃣ Create a Virtual Environment
+### Create a Virtual Environment
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
-### 3️⃣ Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Configure Environment Variables
+### Configure Environment Variables
 
 Create a `.env` file in the project root and add your environment variables. Example:
 
 ```bash
-# Generate SECRET_KEY
+# Generate SECRET_KEY (Good Practice)
 python generate_secret_key.py
 ```
 
 ```
 # filename: .env
-SECRET_KEY = "<SECRET_KEY>"
-EMAIL_HOST_USER = "<EMAIL_HOST_USER>"
-EMAIL_HOST_PASSWORD = "<EMAIL_HOST_PASSWORD>"
+ENV_STATUS = "INFO: Development environment variable loaded successfully!"
+SECRET_KEY = ""
+
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+
+PG_PASS = ""
 ```
 
-### 5️⃣ Run Database Migrations
+### Run Database Migrations
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 6️⃣ Create a Superuser (Optional)
+### Create a Superuser (Optional)
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 7️⃣ Start the Development Server
+### Start the Development Server
 
 ```bash
 python manage.py runserver
 ```
 
----
 
 ## 🔥 API Endpoints
 
@@ -87,56 +133,23 @@ python manage.py runserver
 python list_urls.py
 ```
 
----
-
-## 📂 Project Structure [ Overview ]
-
-```
-e_commerce/
-│── api/                    # API prefix
-|   ...
-│   ├── urls.py             # Global API routes
-|
-│── accounts/               # User authentication and profile management
-|   ...
-│   ├── models.py           # Custom User model
-│   ├── serializers.py      # API data serializers
-│   ├── views.py            # API views
-│   ├── urls.py             # Routes for authentication & profiles
-│   ├── utils.py            # Helper functions (email verification, image processing)
-│
-│── e_commerce/              # Main Django project directory
-|   ...
-│   ├── settings.py         # Django settings
-│   ├── urls.py             # Global Endpoint routes
-│
-│── media/                  # Stores uploaded media files (profile pictures, etc.)
-│── static/                 # Stores static files (javascript, css, etc.)
-│
-|   ...
-│── .env                    # Environment variables
-│── manage.py               # Django management script
-│── requirements.txt        # Required Python dependencies
-│── README.md               # Project documentation
-```
-
----
-
 ## ✅ To-Do List
 
 - [x] Add account apps ✅
 - [x] Prevent to upload large files ✅
-- [ ] Add shop models and endpoints
+- [x] Add shop models and endpoints ✅
+- [x] Implement Postgres DB ✅
+- [x] Add advance search functionality ✅
 - [ ] Add product models and endpoints
 - [ ] Implement cart and checkout functionality
 
----
 
 ## 📜 License
+This project is licensed under a **Proprietary License**.  
+🔹 **You may review the code but cannot use it in any project without permission.**  
+🔹 For inquiries, contact [extremeediting572@gmail.com].
 
-This project is open-source showcase project no license are applied.
 
----
 
 ## 📧 Contact
 

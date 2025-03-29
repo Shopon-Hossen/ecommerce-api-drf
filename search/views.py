@@ -1,4 +1,5 @@
-# from .utils import search_shops
+from .utils import search_shops
+from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import F
 from rest_framework.views import APIView
 from shop.serializers import ShopSerializer
@@ -36,8 +37,11 @@ class ShopAdvanceSearchView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
-        search_query = request.query_params.get('location')
-        shops = Shop.objects.annotate(
-            rank=F('location')).filter(location__icontains=search_query).order_by('rank')
+        query = request.GET.get("q")
+        if not query:
+            return Response({"error": "Query parameter 'q' is required."}, status=400)
 
-        return Response({"t": ShopSerializer(shops, many=True).data})
+        shops = search_shops(query)
+
+        serializer = ShopSerializer(shops, many=True)
+        return Response(serializer.data, status=200)

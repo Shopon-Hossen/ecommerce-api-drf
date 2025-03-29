@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"example1@example.com\",\r\n    \"password\": \"1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"shabupramanik@example.com\",\r\n    \"password\": \"1\",\r\n    \"first_name\": \"Shabu\",\r\n    \"last_name\": \"Pramanik\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,7 +50,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"example1@example.com\",\r\n    \"password\": \"1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"shoponhossen@example.com\",\r\n    \"password\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,14 +109,13 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "display_picture",
-									"type": "file",
-									"src": "/D:/Photo/logos/Postgresql.png"
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"...\",\r\n    \"last_name\": \"...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{base_url}}/account/update/",
@@ -139,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"old_password\": \"3\",\r\n    \"new_password\": \"1\"\r\n}",
+							"raw": "{\r\n    \"old_password\": \"1\",\r\n    \"new_password\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -304,7 +303,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Shop 2\",\r\n    \"description\": \"shop 2\",\r\n    \"location\": \"Bangladesh\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nike\",\r\n    \"description\": \"Shoes are best for sports\",\r\n    \"location\": \"Bangladesh\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -318,6 +317,93 @@
 							],
 							"path": [
 								"shop",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/shop/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"shop",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "banner",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/shop/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"shop",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/shop/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"shop",
+								"1",
 								""
 							]
 						}
@@ -350,7 +436,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/search/shop/?name=shop&location=Bangladesh",
+							"raw": "{{base_url}}/search/shop/?location=Bangladesh",
 							"host": [
 								"{{base_url}}"
 							],
@@ -362,7 +448,8 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "shop"
+									"value": "shop",
+									"disabled": true
 								},
 								{
 									"key": "location",
@@ -394,7 +481,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/search/shop/advance/?location=ka",
+							"raw": "{{base_url}}/search/shop/advance/?q=nikee",
 							"host": [
 								"{{base_url}}"
 							],
@@ -406,8 +493,8 @@
 							],
 							"query": [
 								{
-									"key": "location",
-									"value": "ka"
+									"key": "q",
+									"value": "nikee"
 								}
 							]
 						}

@@ -2,6 +2,7 @@ from django.db import models
 from account.models import User
 from django.conf import settings
 
+from django.contrib.postgres.indexes import GinIndex
 
 class Shop(models.Model):
     name = models.CharField(max_length=100)
@@ -16,3 +17,10 @@ class Shop(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        indexes = [
+            GinIndex(name="shop_name_gin", fields=["name"], opclasses=["gin_trgm_ops"]),
+            GinIndex(name="shop_description_gin", fields=["description"], opclasses=["gin_trgm_ops"]),
+            GinIndex(name="shop_location_gin", fields=["location"], opclasses=["gin_trgm_ops"]),
+        ]

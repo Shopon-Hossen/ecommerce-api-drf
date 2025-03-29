@@ -1,7 +1,7 @@
+from django.contrib.postgres.indexes import GinIndex
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
-import os
 from .image_utils import save_dp_image
 
 
@@ -77,3 +77,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                 self.display_picture = settings.DEFAULT_PROFILE_IMAGE
             super().save(*args, **kwargs)
 
+    class Meta:
+        indexes = [
+            GinIndex(name="user_first_name_gin", fields=["first_name"], opclasses=["gin_trgm_ops"]),
+            GinIndex(name="user_last_name_gin", fields=["last_name"], opclasses=["gin_trgm_ops"]),
+        ]

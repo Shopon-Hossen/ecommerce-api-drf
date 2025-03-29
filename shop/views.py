@@ -28,7 +28,7 @@ class ShopListCreateView(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class ShopDetailView(generics.RetrieveUpdateDestroyAPIView):
+class ShopDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     """
     GET: Retrieve a shop.
     PUT/PATCH: Update a shop.
