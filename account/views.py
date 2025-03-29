@@ -4,15 +4,14 @@ from django.core.signing import BadSignature, SignatureExpired, TimestampSigner
 from .models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics
 from rest_framework import permissions
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserDetailSerializer
 
 
 signer = TimestampSigner()
 
 
-class RegisterView(APIView):
+class UserRegisterView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
@@ -24,7 +23,7 @@ class RegisterView(APIView):
         return Response({"success": True, "message": "Check you're email to verify account"})
 
 
-class UpdateView(APIView):
+class UserUpdateView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
@@ -82,17 +81,17 @@ class SendVerificationView(APIView):
         return Response({"success": True, "message": "Verification email resent successfully."}, status=200)
 
 
-class ProfileView(APIView):
+class UserProfileView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, pk):
         """Get a specific user's details"""
         user = get_object_or_404(User, id=pk)
-        serializer = UserSerializer(user)
+        serializer = UserDetailSerializer(user)
         return Response({"success": True, "data": serializer.data})
 
 
-class PasswordUpdateView(APIView):
+class UserPasswordUpdateView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):

@@ -20,7 +20,7 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
 
   - Images are stored locally.
   - Default profile picture when no image is provided.
-  - Images larger than **2MB** are compressed.
+  - Images larger than **2MB** are not uploaded.
   - Prevents super high-resolution images.
 
 - **Shop Management**
@@ -152,4 +152,4 @@ For questions, feel free to reach out!
 ## **👤 Author**
 
 - **[Shopon Hossen](https://github.com/Shopon-Hossen)**
-- **[Shopon Hossen/ECommerce-API](https://github.com/Shopon-Hossen/ecommerce-api-drf)**
+- **[Shopon Hossen/eCommerce-API](https://github.com/Shopon-Hossen/ecommerce-api-drf)**

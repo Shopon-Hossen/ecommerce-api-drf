@@ -4,6 +4,7 @@ from django.conf import settings
 
 from django.contrib.postgres.indexes import GinIndex
 
+
 class Shop(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shops")
@@ -24,3 +25,18 @@ class Shop(models.Model):
             GinIndex(name="shop_description_gin", fields=["description"], opclasses=["gin_trgm_ops"]),
             GinIndex(name="shop_location_gin", fields=["location"], opclasses=["gin_trgm_ops"]),
         ]
+
+
+class PinnedShop(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pinned_shops")
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="pinned_by_users")  
+    created_at = models.DateTimeField(auto_now_add=True)  
+
+    class Meta:
+        unique_together = ("user", "shop")  # ✅ Prevents duplicate pinning of the same shop
+
+    def __str__(self):
+        return f"{self.user.email} pinned {self.shop.name}"
+
+
+# User.pinned_shop.shop.all()
