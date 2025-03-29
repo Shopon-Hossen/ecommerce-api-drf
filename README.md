@@ -33,6 +33,7 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
 ### Install PostgreSQL if not installed
 
 On `Linux` use APT to install PostgreSQL
+
 ```bash
 apt install postgresql
 ```
@@ -40,13 +41,10 @@ apt install postgresql
 This blog may help you.
 [`Linux downloads (Ubuntu)`](https://www.postgresql.org/download/linux/ubuntu/)
 
-
 On `Windows` download PostgreSQL and install it
 
 This blog may help you.
 [`Windows Postgres Install`](https://www.w3schools.com/postgresql/postgresql_install.php)
-
-
 
 ### Create PostgreSQL Database
 
@@ -65,7 +63,6 @@ Once connected to the `e_commerce` database install the `pg_trgm` extension by r
 ```bash
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
-
 
 ### Clone the Repository
 
@@ -99,7 +96,7 @@ python generate_secret_key.py
 ```
 # filename: .env
 ENV_STATUS = "INFO: Development environment variable loaded successfully!"
-SECRET_KEY = ""
+SECRET_KEY = "django-insecure-<generate_secret_key.py output>"
 
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
@@ -126,7 +123,6 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-
 ## 🔥 API Endpoints
 
 ```python
@@ -143,13 +139,11 @@ python list_urls.py
 - [ ] Add product models and endpoints
 - [ ] Implement cart and checkout functionality
 
-
 ## 📜 License
+
 This project is licensed under a **Proprietary License**.  
 🔹 **You may review the code but cannot use it in any project without permission.**  
 🔹 For inquiries, contact [extremeediting572@gmail.com].
-
-
 
 ## 📧 Contact
 
