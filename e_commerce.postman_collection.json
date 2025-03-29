@@ -559,6 +559,168 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Shop Review",
+			"item": [
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/review/shop/2/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"review",
+								"shop",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/review/shop/2/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"review",
+								"shop",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/review/shop/reviews/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"review",
+								"shop",
+								"reviews",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"Another\",\r\n    \"rating\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/review/shop/reviews/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"review",
+								"shop",
+								"reviews",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/review/shop/reviews/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"review",
+								"shop",
+								"reviews",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -566,7 +728,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODMyOTU1LCJpYXQiOjE3NDMyMjgxNTUsImp0aSI6IjhkZjUzY2FjNzFiOTQyYmY4ZWFhYjFkMjhhOGQyOTBkIiwidXNlcl9pZCI6Mn0.cgTyDItu0NzxJbP6prDQ69GQLpbGL0stRz_20CkqQtM",
 				"type": "string"
 			}
 		]

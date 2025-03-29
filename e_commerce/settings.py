@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "account",
     "shop",
     "search",
+    "shop_review"
 ]
 
 MIDDLEWARE = [
@@ -145,9 +146,9 @@ EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = '2525'
-SITE_URL = 'http://localhost:8000'  # Change as needed
 DEFAULT_FROM_EMAIL = 'shoponhossen@example.com'
 
+SITE_URL = 'http://localhost:8000'  # Change as needed
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

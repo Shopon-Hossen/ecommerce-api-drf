@@ -136,6 +136,7 @@ python list_urls.py
 - [x] Add shop models and endpoints ✅
 - [x] Implement Postgres DB ✅
 - [x] Add advance search functionality ✅
+- [ ] Add review functionality
 - [ ] Add product models and endpoints
 - [ ] Implement cart and checkout functionality
 
