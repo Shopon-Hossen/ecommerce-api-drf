@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "account",
     "shop",
     "search",
-    "shop_review"
+    "shop_review",
+    "product",
 ]
 
 MIDDLEWARE = [
