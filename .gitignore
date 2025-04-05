@@ -6,8 +6,6 @@
 
 # Python bytecode and cache
 __pycache__/
-*.py[cod]
-*.pyo
 
 # Logs
 *.log
@@ -24,10 +22,10 @@ mails.txt
 # Development
 *.sqlite3
 
-dp/*
+media/image/dp/*
 !.gitkeep
 
-product/*
+media/image/product/*
 !.gitkeep
 
 project_context.md
