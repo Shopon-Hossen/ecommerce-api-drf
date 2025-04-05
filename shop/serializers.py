@@ -34,7 +34,10 @@ class ShopListSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
     def get_owner(self, obj: Shop):
-        return UserListSerializer(obj.owner).data
+        return {
+            "id": obj.owner.pk,
+            "first_name": obj.owner.first_name,
+        }
 
 
 class PinnedShopSerializer(serializers.ModelSerializer):
