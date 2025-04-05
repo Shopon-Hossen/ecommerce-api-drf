@@ -5,7 +5,8 @@ from .models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
-from .serializers import UserSerializer, UserDetailSerializer
+from .serializers import UserSerializer
+from rest_framework import generics
 
 
 signer = TimestampSigner()
@@ -81,14 +82,10 @@ class SendVerificationView(APIView):
         return Response({"success": True, "message": "Verification email resent successfully."}, status=200)
 
 
-class UserProfileView(APIView):
+class UserProfileView(generics.RetrieveAPIView):
     permission_classes = [permissions.AllowAny]
-
-    def get(self, request, pk):
-        """Get a specific user's details"""
-        user = get_object_or_404(User, id=pk)
-        serializer = UserDetailSerializer(user)
-        return Response({"success": True, "data": serializer.data})
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class UserPasswordUpdateView(APIView):

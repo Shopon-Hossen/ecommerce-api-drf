@@ -3,6 +3,10 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from .image_utils import save_dp_image
+from account.validates import (
+    image_max_res_validate,
+    image_max_size_validate,
+)
 
 
 class CustomUserManager(BaseUserManager):
@@ -41,7 +45,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verify = models.BooleanField(default=False)
 
     display_picture = models.ImageField(
-        default=settings.DEFAULT_PROFILE_IMAGE, upload_to="image/dp/"
+        default=settings.DEFAULT_PROFILE_IMAGE,
+        upload_to="image/dp/",
+        validators=[image_max_res_validate, image_max_size_validate]
     )
 
     # Set email as the USERNAME_FIELD

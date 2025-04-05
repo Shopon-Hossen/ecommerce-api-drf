@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from shop.serializers import ShopListSerializer
+from shop.serializers import ShopSerializer
 from .models import (
     Product,
     Rating,
@@ -7,8 +7,9 @@ from .models import (
 )
 
 
-class ProductSerializer(serializers.ModelField):
-    shop = serializers.SerializerMethodField()
+class ProductSerializer(serializers.ModelSerializer):
+    category = serializers.CharField(max_length=200)
+
     class Meta:
         model = Product
         fields = ["id", "shop", "name", "description", "price",
@@ -16,6 +17,3 @@ class ProductSerializer(serializers.ModelField):
                   "image", "category", "create_at", "update_at"]
         
         read_only_fields  = ["id", "create_at", "update_at"]
-    
-    def get_shop(self, product):
-        return ShopListSerializer(product.shop).data

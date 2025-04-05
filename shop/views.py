@@ -3,11 +3,11 @@ from .models import PinnedShop, Shop
 from rest_framework import status
 from account.permissions import IsVerifiedUser
 from .permissions import IsShopOwner
-from .serializers import ShopSerializer, PinnedShopSerializer, ShopListSerializer
+from .serializers import ShopSerializer, PinnedShopSerializer
 from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from account.serializers import UserDetailSerializer
+from account.serializers import UserSerializer
 
 
 class ShopHomeView(APIView):
@@ -18,9 +18,9 @@ class ShopHomeView(APIView):
         shops = request.user.shops.all()[:10]
         pinned_shops = request.user.pinned_shops.all()[:10]
 
-        user_serializer = UserDetailSerializer(user)
-        shops_serializer = ShopListSerializer(shops, many=True) # Optional: Use another serializer (Recommended)
-        pinned_shops_serializer = PinnedShopSerializer(pinned_shops, many=True) # Optional: Use another serializer (Recommended)
+        user_serializer = UserSerializer(user)
+        shops_serializer = ShopSerializer(shops, many=True)
+        pinned_shops_serializer = PinnedShopSerializer(pinned_shops, many=True)
 
         return Response({
             "message": "Welcome to the E-Commerce API",

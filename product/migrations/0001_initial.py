@@ -3,7 +3,7 @@
 import django.core.validators
 import django.db.models.deletion
 import product.utlis
-import product.validates
+import account.validates
 from django.db import migrations, models
 
 
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('is_available', models.BooleanField(default=True)),
                 ('cash_on_delivery', models.BooleanField(default=False)),
                 ('replacement', models.PositiveIntegerField(default=0)),
-                ('image', models.ImageField(default='image/default_product.jpg', upload_to=product.utlis.product_image_upload_path, validators=[product.validates.image_max_res_validate, product.validates.image_max_size_validate])),
+                ('image', models.ImageField(default='image/default_product.jpg', upload_to=product.utlis.product_image_upload_path, validators=[account.validates.image_max_res_validate, account.validates.image_max_size_validate])),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='product.category')),
                 ('shop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='shop.shop')),
             ],

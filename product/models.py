@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf import settings
-from .validates import (
+from account.validates import (
     image_max_res_validate,
     image_max_size_validate,
 )
