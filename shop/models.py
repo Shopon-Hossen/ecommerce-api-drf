@@ -1,7 +1,6 @@
 from django.db import models
 from account.models import User
 from django.conf import settings
-
 from django.contrib.postgres.indexes import GinIndex
 
 
@@ -22,7 +21,6 @@ class Shop(models.Model):
     class Meta:
         indexes = [
             GinIndex(name="shop_name_gin", fields=["name"], opclasses=["gin_trgm_ops"]),
-            GinIndex(name="shop_description_gin", fields=["description"], opclasses=["gin_trgm_ops"]),
             GinIndex(name="shop_location_gin", fields=["location"], opclasses=["gin_trgm_ops"]),
         ]
 
@@ -37,6 +35,3 @@ class PinnedShop(models.Model):
 
     def __str__(self):
         return f"{self.user.email} pinned {self.shop.name}"
-
-
-# User.pinned_shop.shop.all()

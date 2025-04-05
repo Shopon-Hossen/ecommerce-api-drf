@@ -27,4 +27,7 @@ mails.txt
 dp/*
 !.gitkeep
 
+product/*
+!.gitkeep
+
 project_context.md
