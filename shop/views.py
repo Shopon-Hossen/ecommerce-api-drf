@@ -8,6 +8,7 @@ from rest_framework import generics, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from account.serializers import UserSerializer
+from account.models import User
 
 
 class ShopHomeView(APIView):
@@ -30,6 +31,17 @@ class ShopHomeView(APIView):
         })
 
 
+class ShopListByUserView(generics.ListAPIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = ShopSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        user = get_object_or_404(User, pk=pk)
+
+        return user.shops.all()
+
+
 class ShopListCreateView(generics.ListCreateAPIView):
     """
     GET: List all shops.
@@ -37,9 +49,8 @@ class ShopListCreateView(generics.ListCreateAPIView):
     """
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsVerifiedUser
-    ]
+    permission_classes = [IsShopOwner]
+
 
     def perform_create(self, serializer):
         # Automatically set the owner of the shop to the current user.
@@ -53,17 +64,15 @@ class ShopDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     DELETE: Delete a shop.
     Only the shop owner (who is also verified) may update or delete.
     """
-    queryset = Shop.objects.all()
+    permission_classes = [IsShopOwner]
     serializer_class = ShopSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsVerifiedUser, IsShopOwner
-    ]
+    queryset = Shop.objects.all()
 
 
 class PinnedShopListView(generics.ListAPIView):
     """🔹 List all pinned shops for the authenticated user"""
-    serializer_class = PinnedShopSerializer
     permission_classes = [permissions.IsAuthenticated]
+    serializer_class = PinnedShopSerializer
 
     def get_queryset(self):
         return PinnedShop.objects.filter(user=self.request.user)
@@ -94,13 +103,7 @@ class UnpinShopView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, *args, **kwargs):
-        user = request.user
-        shop_id = kwargs.get("shop_id")
-
-        try:
-            pinned_shop = PinnedShop.objects.get(user=user, shop_id=shop_id)
-        except PinnedShop.DoesNotExist:
-            return Response({"error": "Pinned shop not found"}, status=status.HTTP_404_NOT_FOUND)
+        pinned_shop = get_object_or_404(user=request.user, shop_id=kwargs.get("shop_id"))
 
         pinned_shop.delete()
         return Response({"message": "Shop unpinned successfully"}, status=status.HTTP_204_NO_CONTENT)

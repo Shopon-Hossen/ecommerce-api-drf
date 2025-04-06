@@ -18,6 +18,16 @@ class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerializer
 
 
+class ProductDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedUser]
+    serializer_class = ProductSerializer
+
+    # def get_queryset(self):
+    #     user_shops = self.request.user.
+    #     return self.request.
+
+
+
 class ProductCreateView(generics.CreateAPIView):
     permission_classes = [IsVerifiedUser]
     queryset = Product.objects.all()

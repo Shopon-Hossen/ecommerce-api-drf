@@ -6,6 +6,7 @@ urlpatterns = [
     path('home/', views.ShopHomeView.as_view(), name='shop-home'),
     path('', views.ShopListCreateView.as_view(), name='shop-list-create'),
     path('<int:pk>/', views.ShopDetailUpdateDeleteView.as_view(), name='shop-detail-update-delete'),
+    path('user/<int:pk>/', views.ShopListByUserView.as_view(), name='shop-by-user'),
     
     path("pin/", views.PinnedShopListView.as_view(), name="pinned-shop-list"),  
     path("pin/<int:shop_id>/", views.PinShopView.as_view(), name="pin-shop"),

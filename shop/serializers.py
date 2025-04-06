@@ -1,13 +1,25 @@
 from .models import PinnedShop
 from rest_framework import serializers
 from .models import Shop
+from account.serializers import UserMiniSerializer
 
 
-class ShopSerializer(serializers.ModelSerializer):
+class ShopMiniSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = [
-            'id', 'name', 'owner', 'description',
+            'id', 'name', 'logo',
+        ]
+        read_only_fields = fields
+
+
+class ShopSerializer(serializers.ModelSerializer):
+    owner_data = UserMiniSerializer(read_only=True, source="owner")
+
+    class Meta:
+        model = Shop
+        fields = [
+            'id', 'name', 'owner', 'description', "owner_data",
             'logo', 'banner', 'location',
             'is_verified', 'created_at', 'updated_at'
         ]

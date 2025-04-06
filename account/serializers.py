@@ -38,3 +38,11 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Email cannot be changed.")
 
         return super().update(instance, validated_data)
+
+
+class UserMiniSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'display_picture', 'is_verify')
+
+        read_only_fields = fields
