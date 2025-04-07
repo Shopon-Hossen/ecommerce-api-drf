@@ -1,34 +1,24 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import permissions, generics
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from account.permissions import IsVerifiedUser
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, ProductMiniSerializer, RatingSerializer
 from shop.models import Shop
+from .permissions import IsProductOwner
 from .models import (
     Product,
-    Category
+    Category,
+    Rating
 )
 
 
-class ProductListView(generics.ListAPIView):
-    permission_classes = [permissions.AllowAny]
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-
 class ProductDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsVerifiedUser]
+    permission_classes = [IsProductOwner]
     serializer_class = ProductSerializer
-
-    # def get_queryset(self):
-    #     user_shops = self.request.user.
-    #     return self.request.
+    queryset = Product.objects.all()
 
 
-
-class ProductCreateView(generics.CreateAPIView):
+class ProductListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedUser]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -52,3 +42,18 @@ class ProductCreateView(generics.CreateAPIView):
             serializer.save(shop=shop, category=category)
         else:
             raise PermissionDenied('You do not have permission to add products to others shop.')
+
+
+class RatingListCreateView(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = RatingSerializer
+
+    def get_queryset(self):
+        product_id = self.request.data.get("product")
+        if not product_id:
+            return Rating.objects.all()
+        
+        return get_object_or_404(Product, pk=product_id).rating.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

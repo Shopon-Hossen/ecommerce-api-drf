@@ -1,22 +1,19 @@
+# permissions.py
 from rest_framework import permissions
 
 
-class IsShopOwner(permissions.BasePermission):
+class IsProductOwner(permissions.BasePermission):
     """
-    Allows access only to the owner of the shop.
+    Allows access only to the owner of the product.
     """
     def has_permission(self, request, view):
-        # Allow safe methods (GET, HEAD, OPTIONS) for anyone.
         if request.method in permissions.SAFE_METHODS:
             return True
-
-        # For non-safe methods, user must be authenticated and verified.
+        
         return request.user and request.user.is_authenticated and request.user.is_verify
 
-
     def has_object_permission(self, request, view, obj):
-        # Allow safe methods for anyone.
         if request.method in permissions.SAFE_METHODS:
             return True
-        # Only the shop owner can update or delete the shop.
-        return obj.owner == request.user
+        
+        return obj.shop in request.user.shops.all()

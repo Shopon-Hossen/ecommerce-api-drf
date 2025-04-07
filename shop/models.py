@@ -20,8 +20,7 @@ class Shop(models.Model):
 
     class Meta:
         indexes = [
-            GinIndex(name="shop_name_gin", fields=["name"], opclasses=["gin_trgm_ops"]),
-            GinIndex(name="shop_location_gin", fields=["location"], opclasses=["gin_trgm_ops"]),
+            GinIndex(name="shop_name_gin", fields=["name"], opclasses=["gin_trgm_ops"])
         ]
 
 

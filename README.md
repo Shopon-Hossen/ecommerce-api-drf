@@ -1,10 +1,10 @@
 # 🛒 E-Commerce API (Django Rest Framework)
 
-This is a backend API for an e-commerce platform built using Django Rest Framework (DRF). It provides authentication, user profile management, image handling, Postgres Database, advance search with pg_trgm, shop management and more.
+This is a backend API for an e-commerce platform built using Django Rest Framework (DRF). It provides authentication, products management, user profile management, image handling, Postgres Database, advance search with pg_trgm, shop management and more.
 
 ## 📌 Features
 
-- **User Authentication**
+- **Account**
 
   - Custom user model with email-based login.
   - Email verification system.
@@ -20,13 +20,22 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
 
   - Images are stored locally.
   - Default profile picture when no image is provided.
-  - Images larger than **2MB** are not uploaded.
+  - Images larger than **5MB** are not uploaded.
   - Prevents super high-resolution images.
 
 - **Shop Management**
+
   - Create, Read, Update, Delete (CRUD) shops.
-  - Search shops.
-  - Fuzzy Search shops (Typo correction, best match first).
+  - Fuzzy search shops (Typo correction, best match first).
+  - Like/Pin any shop by any Users.
+
+- **Product Management**
+
+  - Product can be Create, Update, Delete if user owner of the shop.
+  - Any user can see: list and detail of Products.
+  - Fuzzy search products using pg_trgm.
+  - Filtering product (price range, ordering).
+  - Any logged in user can rate any Products.
 
 ## 🚀 Installation & Setup
 
@@ -38,13 +47,7 @@ On `Linux` use APT to install PostgreSQL
 apt install postgresql
 ```
 
-This blog may help you.
-[`Linux downloads (Ubuntu)`](https://www.postgresql.org/download/linux/ubuntu/)
-
-On `Windows` download PostgreSQL and install it
-
-This blog may help you.
-[`Windows Postgres Install`](https://www.w3schools.com/postgresql/postgresql_install.php)
+On `Windows` download PostgreSQL and install it.
 
 ### Create PostgreSQL Database
 
@@ -96,7 +99,7 @@ python generate_secret_key.py
 ```
 # filename: .env
 ENV_STATUS = "INFO: Development environment variable loaded successfully!"
-SECRET_KEY = "django-insecure-<generate_secret_key.py output>"
+SECRET_KEY = "django-insecure-<generate_secret_key.py output>" # Best Practice
 
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
@@ -117,6 +120,8 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
+Then do the following. (Email, password, again_password)
+
 ### Start the Development Server
 
 ```bash
@@ -125,9 +130,12 @@ python manage.py runserver
 
 ## 🔥 API Endpoints
 
-```python
+```bash
+# get available list of urls
 python list_urls.py
 ```
+
+You can test APIs with Postman client. just import `e_commerce.postman_collection.json` in your Postman collection.
 
 ## ✅ To-Do List
 
@@ -136,8 +144,8 @@ python list_urls.py
 - [x] Add shop models and endpoints ✅
 - [x] Implement Postgres DB ✅
 - [x] Add advance search functionality ✅
-- [ ] Add review functionality
-- [ ] Add product models and endpoints
+- [x] Add review functionality ✅
+- [x] Add product models and endpoints ✅
 - [ ] Implement cart and checkout functionality
 
 ## 📜 License

@@ -8,6 +8,9 @@ from account.validates import (
 )
 from .utlis import product_image_upload_path
 from shop.models import Shop
+from account.models import User
+from django.contrib.postgres.indexes import GinIndex
+
 
 
 class Category(models.Model):
@@ -29,7 +32,7 @@ class Product(models.Model):
     description = models.TextField(default="")
 
     # Pricing
-    price = models.PositiveIntegerField(validators=[MinValueValidator(10)])
+    price = models.PositiveIntegerField(validators=[MinValueValidator(10), MaxValueValidator(10**5)])
     discount_price = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=1)
     is_available = models.BooleanField(default=True)
@@ -45,6 +48,7 @@ class Product(models.Model):
 
     # Other
     category = models.ForeignKey(Category, models.CASCADE, related_name='products')
+    specification = models.JSONField(default=dict)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -55,18 +59,17 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+    
+    class Meta:
+        indexes = [
+            GinIndex(name="product_name_gin", fields=["name"], opclasses=["gin_trgm_ops"])
+        ]
 
 
 class Rating(models.Model):
     product = models.ForeignKey(Product, models.CASCADE, related_name="rating")
+    user = models.ForeignKey(User, models.CASCADE, related_name="rating")
     content = models.TextField(default="")
     star = models.PositiveIntegerField(validators=[MaxValueValidator(5)])
-
-
-class Comment(models.Model):
-    # Essential
-    product = models.ForeignKey(Product, models.CASCADE, related_name="comments")
-    content = models.CharField()
-    
-    # Date and time
     create_at = models.DateTimeField(auto_now_add=True)
+

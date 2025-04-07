@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from account.serializers import UserSerializer
 from account.models import User
+from rest_framework.exceptions import ValidationError
 
 
 class ShopHomeView(APIView):
@@ -67,6 +68,17 @@ class ShopDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsShopOwner]
     serializer_class = ShopSerializer
     queryset = Shop.objects.all()
+
+    def perform_destroy(self, instance):
+        password = self.request.data.get("password")
+        user = self.request.user
+
+        if not user.is_authenticated or not password or not user.check_password(password):
+            raise ValidationError({
+                "invalid_password_error": "Invalid password or password not provided"
+            })
+
+        instance.delete()
 
 
 class PinnedShopListView(generics.ListAPIView):
