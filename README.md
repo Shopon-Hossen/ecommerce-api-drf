@@ -57,13 +57,13 @@ Once you have created the database now you need to install an PostgreSQL extensi
 
 To install `pg_trgm` extension first connect to `e_commerce` database. to do that run this command on `psql`
 
-```bash
+```psql
 \c e_commerce
 ```
 
 Once connected to the `e_commerce` database install the `pg_trgm` extension by running following command on `psql`
 
-```bash
+```psql
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
 
