@@ -6,8 +6,8 @@ from django.contrib.postgres.indexes import GinIndex
 
 class Shop(models.Model):
     name = models.CharField(max_length=100)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shops")
-    description = models.TextField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shops")
+    description = models.TextField(blank=True, max_length=10**4)
     logo = models.ImageField(default=settings.DEFAULT_SHOP_LOGO_IMAGE, upload_to="image/shop/logo/")
     banner = models.ImageField(default=settings.DEFAULT_SHOP_BANNER_IMAGE, upload_to="image/shop/banner/")
     location = models.CharField(max_length=100)

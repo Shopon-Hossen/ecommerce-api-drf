@@ -5,8 +5,7 @@ from django.urls import get_resolver, URLPattern, URLResolver
 
 
 # Set the DJANGO_SETTINGS_MODULE environment variable to project's settings module.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                      "e_commerce.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "e_commerce.settings")
 sys.path.append(".")
 
 # Initialize Django

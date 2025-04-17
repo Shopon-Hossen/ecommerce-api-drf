@@ -6,6 +6,7 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
 
 - **Account**
 
+  - JWT auth system.
   - Custom user model with email-based login.
   - Email verification system.
   - Secure password handling.
@@ -36,6 +37,13 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
   - Fuzzy search products using pg_trgm.
   - Filtering product (price range, ordering).
   - Any logged in user can rate any Products.
+
+- **Cart Management**
+
+  - Any logged in User can add product to there cart.
+  - Cart will automatically created when user register.
+  - Cart items can be updated (Increment and Decrement quantity) or delete.
+  - Quantity range is 1 to 99 (Can be change)
 
 ## 🚀 Installation & Setup
 
@@ -92,13 +100,13 @@ pip install -r requirements.txt
 Create a `.env` file in the project root and add your environment variables. Example:
 
 ```bash
-# Generate SECRET_KEY (Good Practice)
+# Generate SECRET_KEY (Recommended)
 python generate_secret_key.py
 ```
 
 ```
 # filename: .env
-ENV_STATUS = "INFO: Development environment variable loaded successfully!"
+ENV_STATUS = "_INFO: Development environment variable loaded successfully!"
 SECRET_KEY = "django-insecure-<generate_secret_key.py output>" # Best Practice
 
 EMAIL_HOST_USER = ""
@@ -139,14 +147,16 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 
 ## ✅ To-Do List
 
-- [x] Add account apps ✅
+- [x] `account` management ✅
 - [x] Prevent to upload large files ✅
-- [x] Add shop models and endpoints ✅
-- [x] Implement Postgres DB ✅
-- [x] Add advance search functionality ✅
-- [x] Add review functionality ✅
-- [x] Add product models and endpoints ✅
-- [ ] Implement cart and checkout functionality
+- [x] `shop` models and endpoints ✅
+- [x] Postgres DB ✅
+- [x] Advance search for `shop` and `product` ✅
+- [x] Filtering for `product` ✅
+- [x] `product` models and endpoints ✅
+- [x] `product` FAQ ✅
+- [ ] `product` comments
+- [x] `cart` management ✅
 
 ## 📜 License
 

@@ -3,9 +3,6 @@ from rest_framework import permissions
 
 
 class IsProductOwner(permissions.BasePermission):
-    """
-    Allows access only to the owner of the product.
-    """
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True

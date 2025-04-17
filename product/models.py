@@ -29,7 +29,7 @@ class Product(models.Model):
     shop = models.ForeignKey(Shop, models.CASCADE, related_name="products")
     name = models.CharField(max_length=300)
     name_slug = models.SlugField(blank=True)
-    description = models.TextField(default="")
+    description = models.TextField(default="", max_length=10**4)
 
     # Pricing
     price = models.PositiveIntegerField(validators=[MinValueValidator(10), MaxValueValidator(10**5)])
@@ -69,7 +69,7 @@ class Product(models.Model):
 class Rating(models.Model):
     product = models.ForeignKey(Product, models.CASCADE, related_name="rating")
     user = models.ForeignKey(User, models.CASCADE, related_name="rating")
-    content = models.TextField(default="")
+    content = models.TextField(default="", max_length=10**3)
     star = models.PositiveIntegerField(validators=[MaxValueValidator(5)])
     create_at = models.DateTimeField(auto_now_add=True)
 

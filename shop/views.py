@@ -54,17 +54,10 @@ class ShopListCreateView(generics.ListCreateAPIView):
 
 
     def perform_create(self, serializer):
-        # Automatically set the owner of the shop to the current user.
-        serializer.save(owner=self.request.user)
+        serializer.save(user=self.request.user)
 
 
 class ShopDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    GET: Retrieve a shop.
-    PUT/PATCH: Update a shop.
-    DELETE: Delete a shop.
-    Only the shop owner (who is also verified) may update or delete.
-    """
     permission_classes = [IsShopOwner]
     serializer_class = ShopSerializer
     queryset = Shop.objects.all()
@@ -82,7 +75,6 @@ class ShopDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PinnedShopListView(generics.ListAPIView):
-    """🔹 List all pinned shops for the authenticated user"""
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = PinnedShopSerializer
 
@@ -91,7 +83,6 @@ class PinnedShopListView(generics.ListAPIView):
 
 
 class PinShopView(generics.CreateAPIView):
-    """🔹 Pin a shop"""
     serializer_class = PinnedShopSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -111,7 +102,6 @@ class PinShopView(generics.CreateAPIView):
 
 
 class UnpinShopView(generics.DestroyAPIView):
-    """🔹 Unpin a shop"""
     permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, *args, **kwargs):

@@ -14,17 +14,17 @@ class ShopMiniSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializer(serializers.ModelSerializer):
-    owner_data = UserMiniSerializer(read_only=True, source="owner")
+    user_data = UserMiniSerializer(read_only=True, source="user")
 
     class Meta:
         model = Shop
         fields = [
-            'id', 'name', 'owner', 'description', "owner_data",
+            'id', 'name', 'user', 'description', "user_data",
             'logo', 'banner', 'location',
             'is_verified', 'created_at', 'updated_at'
         ]
         read_only_fields = [
-            'id', 'owner',
+            'id', 'user',
             'is_verified', 'created_at', 'updated_at'
         ]
 

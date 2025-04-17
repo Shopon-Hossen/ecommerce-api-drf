@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     "account",
     "shop",
     "search",
-    "shop_review",
     "product",
     "cart",
+    "product_faq"
 ]
 
 MIDDLEWARE = [
@@ -139,18 +139,16 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # Custom
 AUTH_USER_MODEL = 'account.User'
 
-# Looking to send emails in production? Check out our Email API/SMTP product!
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = '2525'
-DEFAULT_FROM_EMAIL = 'shoponhossen@example.com'
+DEFAULT_FROM_EMAIL = 'extremeediting572@gmail.com'
 
-SITE_URL = 'http://localhost:8000'  # Change as needed
+SITE_URL = 'http://localhost:8000' # Change as needed
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
