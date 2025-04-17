@@ -20,11 +20,9 @@ class CartItemListCreateView(generics.ListCreateAPIView):
             raise ValidationError({"error": "This product is already in your cart."})
 
 
-class CartItemDestroyView(generics.DestroyAPIView):
+class CartItemDestroyUpdateView(generics.DestroyAPIView, generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CartItemSerializer
 
     def get_queryset(self):
         return CartItem.objects.filter(cart=self.request.user.cart)
-
-# TODO: Add Increment and Decrement for CartItem quantity
