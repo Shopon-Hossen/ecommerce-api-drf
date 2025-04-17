@@ -37,6 +37,7 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
   - Fuzzy search products using pg_trgm.
   - Filtering product (price range, ordering).
   - Any logged in user can rate any Products.
+  - FAQ for products.
 
 - **Cart Management**
 
@@ -128,7 +129,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-Then do the following. (Email, password, again_password)
+Then do the following. (Email, password, reenter password)
 
 ### Start the Development Server
 
@@ -147,16 +148,17 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 
 ## ✅ To-Do List
 
-- [x] `account` management ✅
-- [x] Prevent to upload large files ✅
-- [x] `shop` models and endpoints ✅
-- [x] Postgres DB ✅
-- [x] Advance search for `shop` and `product` ✅
-- [x] Filtering for `product` ✅
-- [x] `product` models and endpoints ✅
-- [x] `product` FAQ ✅
-- [ ] `product` comments
-- [x] `cart` management ✅
+- [x] Account management
+- [x] Prevent to upload large files
+- [x] Shop management endpoints
+- [x] Postgres DB
+- [x] pg_trgm
+- [x] Advance search for shop and product
+- [x] Filtering for product (eg, price range)
+- [x] Product endpoints
+- [x] Product FAQ
+- [x] Cart management
+- [ ] Product comments
 
 ## 📜 License
 

@@ -7,6 +7,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Cart(models.Model):
     user = models.OneToOneField(User, models.CASCADE, related_name="cart")
 
+    def __str__(self):
+        return f"Cart | {self.user}"
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, models.CASCADE, related_name="cart_items")
@@ -17,3 +20,6 @@ class CartItem(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["cart", "product"], name="unique_cart_product")
         ]
+
+    def __str__(self):
+        return f"{self.quantity} | {self.product}"

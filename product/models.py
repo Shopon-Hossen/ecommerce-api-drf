@@ -32,7 +32,7 @@ class Product(models.Model):
     description = models.TextField(default="", max_length=10**4)
 
     # Pricing
-    price = models.PositiveIntegerField(validators=[MinValueValidator(10), MaxValueValidator(10**5)])
+    price = models.PositiveIntegerField(validators=[MinValueValidator(10), MaxValueValidator(10**8)])
     discount_price = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=1)
     is_available = models.BooleanField(default=True)

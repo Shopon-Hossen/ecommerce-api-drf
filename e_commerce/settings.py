@@ -174,8 +174,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default image URL
 DEFAULT_PROFILE_IMAGE = "image/default_dp.jpg"
-DEFAULT_SHOP_LOGO_IMAGE = DEFAULT_PROFILE_IMAGE
-DEFAULT_SHOP_BANNER_IMAGE = DEFAULT_SHOP_LOGO_IMAGE
+DEFAULT_SHOP_LOGO_IMAGE = "image/default_shop_logo.jpg"
+DEFAULT_SHOP_BANNER_IMAGE = "image/default_shop_banner.jpg"
 DEFAULT_PRODUCT_IMAGE = "image/default_product.jpg"
 
 MAX_UPLOAD_SIZE = 5 * 1024 * 1024

@@ -2,9 +2,6 @@ from rest_framework import permissions
 
 
 class IsVerifiedUser(permissions.BasePermission):
-    """
-    Allows access to non-safe methods only if the user is verified.
-    """
 
     def has_permission(self, request, view):
         # Allow safe methods (GET, HEAD, OPTIONS) for anyone.
