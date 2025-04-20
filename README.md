@@ -179,11 +179,14 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 - [x] Product FAQ
 - [x] Cart management
 - [x] Real time user notifications (channels)
+- [x] Add some security hardening
 - [ ] Product comments
 - [ ] User chat with shop
 - [ ] User request to verify account endpoint
 - [ ] Admin accept requested user verification endpoint
 - [ ] Real time search recommendation (channels)
+- [ ] Add pytest tests
+- [ ] Learn how to Dockerize it
 
 ## 📜 License
 
