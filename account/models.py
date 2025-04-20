@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from .image_utils import save_dp_image
 from account.validates import (
-    image_max_res_validate,
     image_max_size_validate,
 )
 
@@ -47,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     display_picture = models.ImageField(
         default=settings.DEFAULT_PROFILE_IMAGE,
         upload_to="image/dp/",
-        validators=[image_max_res_validate, image_max_size_validate]
+        validators=[image_max_size_validate]
     )
 
     # Set email as the USERNAME_FIELD

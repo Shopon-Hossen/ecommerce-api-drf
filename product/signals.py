@@ -1,9 +1,12 @@
 # signals.py
-from django.db.models.signals import post_delete, pre_save
+from django.db.models.signals import post_delete, pre_save, post_save
 from django.dispatch import receiver
-from .models import Product
+from django.urls import reverse
+from notification.models import UserNotification
+from .models import Product, Rating
 import os
 from django.conf import settings
+
 
 
 @receiver(post_delete, sender=Product)
@@ -29,4 +32,13 @@ def delete_image_on_product_update(sender, instance, **kwargs):
     if old_image and new_image and old_image != new_image:
         if os.path.isfile(old_image.path):
             os.remove(old_image.path)
-    
+
+
+@receiver(post_save, sender=Rating)
+def create_notification_rating_creation(sender, instance, created, **kwargs):
+
+    if created:
+        UserNotification.objects.create(
+            user=instance.product.shop.user,
+            message=f"[**{instance.user.first_name}**]({reverse("profile", kwargs={"pk": instance.user.pk})}) give **{instance.star}** star rating on [**{instance.product.name}**]({reverse("detail-update-delete-product", kwargs={"pk": instance.product.pk})})"
+        )

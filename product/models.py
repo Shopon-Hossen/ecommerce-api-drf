@@ -3,13 +3,13 @@ from django.template.defaultfilters import slugify
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf import settings
 from account.validates import (
-    image_max_res_validate,
     image_max_size_validate,
 )
 from .utlis import product_image_upload_path
 from shop.models import Shop
 from account.models import User
 from django.contrib.postgres.indexes import GinIndex
+from notification.models import UserNotification
 
 
 
@@ -43,7 +43,7 @@ class Product(models.Model):
     image = models.ImageField(
         upload_to=product_image_upload_path,
         default=settings.DEFAULT_PRODUCT_IMAGE,
-        validators=[image_max_res_validate, image_max_size_validate]
+        validators=[image_max_size_validate]
     )
 
     # Other
@@ -72,4 +72,3 @@ class Rating(models.Model):
     content = models.TextField(default="", max_length=10**3)
     star = models.PositiveIntegerField(validators=[MaxValueValidator(5)])
     create_at = models.DateTimeField(auto_now_add=True)
-

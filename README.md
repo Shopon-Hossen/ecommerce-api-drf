@@ -19,10 +19,9 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
 
 - **Image Handling**
 
-  - Images are stored locally.
   - Default profile picture when no image is provided.
   - Images larger than **5MB** are not uploaded.
-  - Prevents super high-resolution images.
+  - All not used image will automatically deleted
 
 - **Shop Management**
 
@@ -45,6 +44,11 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
   - Cart will automatically created when user register.
   - Cart items can be updated (Increment and Decrement quantity) or delete.
   - Quantity range is 1 to 99 (Can be change)
+
+- **Real Time Notification**
+
+  - Automatically send notification to user when UserNotification was create
+
 
 ## 🚀 Installation & Setup
 
@@ -89,12 +93,16 @@ cd e_commerce
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
+This will create a isolated virtual environment in `.venv` directory.
+
+if you get some error like `python was not found or not recognized` try using `python3` or install python if not installed. 
 
 ### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+This will install all necessary packages eg django, channels etc to run our project.
 
 ### Configure Environment Variables
 
@@ -107,14 +115,21 @@ python generate_secret_key.py
 
 ```
 # filename: .env
+
 ENV_STATUS = "_INFO: Development environment variable loaded successfully!"
-SECRET_KEY = "django-insecure-<generate_secret_key.py output>" # Best Practice
+SECRET_KEY = "django-insecure-<generate_secret_key.py output>"
 
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 
 PG_PASS = ""
 ```
+
+ - The `ENV_STATUS` will help to debug does this file loaded properly.
+ - `SECRET_KEY` Need to `Encrypt` and `Decrypt` data, eg `access_token` **(do not make it public)**.
+ - This 2 (`EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD`) variable need to sending `email`.
+ - `PG_PASS` Password for PostgreSQL database.
+
 
 ### Run Database Migrations
 
@@ -123,13 +138,18 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+ - `makemigrations` will initialize our migrations. kind a like pack everything up before going to trip.
+ - `migrate` will tell the database to changes.
+
+
 ### Create a Superuser (Optional)
 
 ```bash
 python manage.py createsuperuser
 ```
 
-Then do the following. (Email, password, reenter password)
+Then do the following. (Email, password, reenter password).
+You can access the Django built in admin dashboard [**Django Admin**](http://127.0.0.1:8000/admin/)
 
 ### Start the Development Server
 
@@ -158,7 +178,12 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 - [x] Product endpoints
 - [x] Product FAQ
 - [x] Cart management
+- [x] Real time user notifications (channels)
 - [ ] Product comments
+- [ ] User chat with shop
+- [ ] User request to verify account endpoint
+- [ ] Admin accept requested user verification endpoint
+- [ ] Real time search recommendation (channels)
 
 ## 📜 License
 

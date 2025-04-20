@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('is_available', models.BooleanField(default=True)),
                 ('cash_on_delivery', models.BooleanField(default=False)),
                 ('replacement', models.PositiveIntegerField(default=0)),
-                ('image', models.ImageField(default='image/default_product.jpg', upload_to=product.utlis.product_image_upload_path, validators=[account.validates.image_max_res_validate, account.validates.image_max_size_validate])),
+                ('image', models.ImageField(default='image/default_product.jpg', upload_to=product.utlis.product_image_upload_path, validators=[account.validates.image_max_size_validate])),
                 ('specification', models.JSONField(default=dict)),
                 ('create_at', models.DateTimeField(auto_now_add=True)),
                 ('update_at', models.DateTimeField(auto_now=True)),

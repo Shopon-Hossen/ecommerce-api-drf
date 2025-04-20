@@ -1,3 +1,5 @@
+# generated_by: ChatGPT o3 mini.
+
 import os
 import sys
 import django

@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False)),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_verify', models.BooleanField(default=False)),
-                ('display_picture', models.ImageField(default='image/default_dp.jpg', upload_to='image/dp/', validators=[account.validates.image_max_res_validate, account.validates.image_max_size_validate])),
+                ('display_picture', models.ImageField(default='image/default_dp.jpg', upload_to='image/dp/', validators=[account.validates.image_max_size_validate])),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
             ],

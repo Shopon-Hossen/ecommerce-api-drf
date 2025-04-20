@@ -29,7 +29,10 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "channels",
+    "corsheaders",
     "rest_framework",
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,12 +44,14 @@ INSTALLED_APPS = [
     "search",
     "product",
     "cart",
-    "product_faq"
+    "product_faq",
+    "notification",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -72,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'e_commerce.wsgi.application'
+ASGI_APPLICATION = 'e_commerce.asgi.application'
 
 
 # Database
@@ -133,6 +138,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -142,13 +151,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom
 AUTH_USER_MODEL = 'account.User'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = '2525'
 DEFAULT_FROM_EMAIL = 'extremeediting572@gmail.com'
 
-SITE_URL = 'http://localhost:8000' # Change as needed
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -160,16 +170,9 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    # Change this on production. eg: minutes = 5
     'ACCESS_TOKEN_LIFETIME': timedelta(weeks=1),
-    # Change this on production. eg: days = 30
     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=1),
 }
-
-
-# Media files (User-uploaded files)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default image URL
@@ -179,5 +182,22 @@ DEFAULT_SHOP_BANNER_IMAGE = "image/default_shop_banner.jpg"
 DEFAULT_PRODUCT_IMAGE = "image/default_product.jpg"
 
 MAX_UPLOAD_SIZE = 5 * 1024 * 1024
-MAX_IMAGE_WIDTH = 5000
-MAX_IMAGE_HEIGHT = 5000
+
+
+# Redis backend for real-time WebSocket communication
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Use Redis in production
+    },
+}
+
+
+# Example redis
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }

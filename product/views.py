@@ -5,6 +5,7 @@ from account.permissions import IsVerifiedUser
 from .serializers import ProductSerializer, ProductMiniSerializer, RatingSerializer
 from shop.models import Shop
 from .permissions import IsProductOwner
+from notification.models import UserNotification
 from .models import (
     Product,
     Category,
