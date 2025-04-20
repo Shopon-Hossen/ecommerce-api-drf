@@ -7,7 +7,7 @@ ENV_STATUS = config("ENV_STATUS")
 if ENV_STATUS:
     print(ENV_STATUS)
 else:
-    print("WARNING: Development environment variable are not loaded successfully!")
+    print("_WARNING: Development environment variable are not loaded successfully!")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,8 +23,11 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# SECURITY WARNING: set only hosts that you trust (you're own hosts only)
+# SECURITY WARNING: set only hosts that you trust (you're own hosts only).
 ALLOWED_HOSTS = ["*"]
+
+# Example ALLOWED_HOSTS
+# ALLOWED_HOSTS = ["yourdomain.com", "www.yourdomain.com"]
 
 
 # Application definition
@@ -189,7 +192,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Example redis
+# Example CHANNEL_LAYERS
 # CHANNEL_LAYERS = {
 #     "default": {
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
