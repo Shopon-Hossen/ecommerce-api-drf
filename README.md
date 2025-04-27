@@ -168,25 +168,30 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 
 ## ✅ To-Do List
 
-- [x] Account management
-- [x] Prevent to upload large files
-- [x] Shop management endpoints
-- [x] Postgres DB
-- [x] pg_trgm
-- [x] Advance search for shop and product
-- [x] Filtering for product (eg, price range)
-- [x] Product endpoints
-- [x] Product FAQ
-- [x] Cart management
-- [x] Real time user notifications (channels)
-- [x] Add some security hardening
-- [x] Product comments
-- [ ] User chat with shop owners (channels)
-- [ ] User request to verify account endpoint
-- [ ] Admin accept requested user verification endpoint
-- [ ] Real time search recommendation (channels)
-- [ ] Add pytest tests
-- [ ] Learn how to Dockerize it
+- [x] Build account management system.
+- [x] Implement email-based login with custom user model.
+- [x] Integrate MailTrap for development email testing.
+- [x] Prevent uploading excessively large files.
+- [x] Create full shop management endpoints.
+- [x] Integrate PostgreSQL database.
+- [x] Implement `pg_trgm` extension for better search matching.
+- [x] Build advanced search functionality for shops and products.
+- [x] Add product filtering capabilities (e.g., price range, search by title).
+- [x] Develop complete product management endpoints.
+- [x] Implement product FAQ management (create, update, delete).
+- [x] Build cart management (add, update, delete items).
+- [x] Implement real-time user notifications using Django Channels.
+- [x] Add basic security hardening (input validation, permissions, rate limiting).
+- [x] Build product comment system (including replies).
+- [ ] Implement user-to-shop owner real-time chat (via Django Channels).
+- [ ] Create "Request Verification" endpoint for users.
+- [ ] Create "Admin Accept Verification" endpoint for verified requests.
+- [ ] Add real-time search recommendations (via Django Channels).
+- [ ] Add unit and integration tests using **Pytest** and **DRF Test framework**.
+- [ ] Learn how to Dockerize the project for easier deployment.
+- [ ] Write a clean, detail API documentation for all endpoints.
+- [ ] (Optional) Deploy to cloud platform (e.g., Railway, Render, or VPS) to showcase the live API.
+
 
 ## 📜 License
 
