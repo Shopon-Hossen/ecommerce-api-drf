@@ -43,6 +43,6 @@ class UserSerializer(serializers.ModelSerializer):
 class UserMiniSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'display_picture', 'is_verify')
+        fields = ('id', 'first_name', 'last_name', 'display_picture', 'is_verify')
 
         read_only_fields = fields

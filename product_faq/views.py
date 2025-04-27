@@ -1,27 +1,29 @@
 from rest_framework import generics
-from .serializers import ProductFAQSerializers
+from .serializers import ProductFAQSerializer
 from shop.permissions import IsShopOwner
 from .models import ProductFAQ
 from product.models import Product
 from django.shortcuts import get_object_or_404
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
-class ProductFAQView(generics.ListCreateAPIView):
+class ProductFAQListCreate(generics.ListCreateAPIView):
     permission_classes = [IsShopOwner]
-    serializer_class = ProductFAQSerializers
+    serializer_class = ProductFAQSerializer
 
     def get_queryset(self):
-        product = get_object_or_404(Product, pk=self.request.data.get("product"))
-        return ProductFAQ.objects.filter(product=product)
-
-
-class ProductFAQDeleteView(APIView):
-    permission_classes = [IsShopOwner]
+        product_id = self.kwargs.get("product")
+        return ProductFAQ.objects.filter(product=product_id)
     
-    def delete(self, request, pk):
-        product_faq = get_object_or_404(ProductFAQ, pk=pk, product__shop__user=request.user)
-        product_faq.delete()
+    def perform_create(self, serializer):
+        product_id = self.kwargs.get("product")
+        serializer.save(product=get_object_or_404(Product, pk=product_id))
 
-        return Response({"detail": "FAQ deleted successfully."}, status=204)
+
+class ProductFAQDeleteView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProductFAQSerializer
+
+    def get_queryset(self):
+        product = get_object_or_404(Product, pk=self.kwargs.get("product"))
+        return ProductFAQ.objects.filter(product=product, product__shop__user=self.request.user)

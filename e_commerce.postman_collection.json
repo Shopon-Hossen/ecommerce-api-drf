@@ -43,11 +43,14 @@
 				{
 					"name": "login",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"shoponhossen@example.com\",\r\n    \"password\": \"1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"adam@example.com\",\r\n    \"password\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -777,7 +780,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"product\": 7\r\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -785,13 +788,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/product/faq/",
+									"raw": "{{base_url}}/product/7/faqs/",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"product",
-										"faq",
+										"7",
+										"faqs",
 										""
 									]
 								}
@@ -805,7 +809,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"product\": 7,\r\n    \"question\": \"Can I play Minecraft?\",\r\n    \"answer\": \"Yes\"\r\n}",
+									"raw": "{\r\n    \"question\": \"Can I play Minecraft?\",\r\n    \"answer\": \"Yes\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -813,13 +817,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/product/faq/",
+									"raw": "{{base_url}}/product/7/faqs/",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"product",
-										"faq",
+										"7",
+										"faqs",
 										""
 									]
 								}
@@ -827,7 +832,7 @@
 							"response": []
 						},
 						{
-							"name": "update",
+							"name": "delete",
 							"request": {
 								"method": "DELETE",
 								"header": [],
@@ -841,15 +846,85 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_url}}/product/faq/delete/2/",
+									"raw": "{{base_url}}/product/7/faqs/delete/4/",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"product",
-										"faq",
+										"7",
+										"faqs",
 										"delete",
+										"4",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/2/comments/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
 										"2",
+										"comments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\": \"Nice Replie\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/2/comments/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										"2",
+										"comments",
 										""
 									]
 								}

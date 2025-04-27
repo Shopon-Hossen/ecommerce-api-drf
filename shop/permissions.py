@@ -12,8 +12,4 @@ class IsShopOwner(permissions.BasePermission):
 
 
     def has_object_permission(self, request, view, obj):
-        # Allow safe methods for anyone.
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        # Only the shop user can update or delete the shop.
         return obj.user == request.user

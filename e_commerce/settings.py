@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "cart",
     "product_faq",
     "notification",
+    "comment",
 ]
 
 MIDDLEWARE = [
@@ -174,8 +175,8 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_THROTTLE_RATES': {
-        'user': '25/min',
-        'anon': '10/min',
+        'user': '1/sec',
+        'anon': '30/min',
     }
 }
 

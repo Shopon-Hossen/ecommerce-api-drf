@@ -43,11 +43,11 @@ This is a backend API for an e-commerce platform built using Django Rest Framewo
   - Any logged in User can add product to there cart.
   - Cart will automatically created when user register.
   - Cart items can be updated (Increment and Decrement quantity) or delete.
-  - Quantity range is 1 to 99 (Can be change)
+  - Quantity range is 1 to 99 (Can be change).
 
 - **Real Time Notification**
 
-  - Automatically send notification to user when UserNotification was create
+  - Automatically send notification to user when UserNotification was create.
 
 
 ## 🚀 Installation & Setup
@@ -180,8 +180,8 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 - [x] Cart management
 - [x] Real time user notifications (channels)
 - [x] Add some security hardening
-- [ ] Product comments
-- [ ] User chat with shop
+- [x] Product comments
+- [ ] User chat with shop owners (channels)
 - [ ] User request to verify account endpoint
 - [ ] Admin accept requested user verification endpoint
 - [ ] Real time search recommendation (channels)
