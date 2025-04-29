@@ -1,5 +1,6 @@
 from django.urls import path, include
 
+
 urlpatterns = [
     path('product/', include("product.urls")),
     path('account/', include("account.urls")),
@@ -7,4 +8,5 @@ urlpatterns = [
     path('search/', include("search.urls")),
     path('cart/', include("cart.urls")),
     path('notification/', include("notification.urls")),
+    path('chat/', include("chat.urls")),
 ]
