@@ -50,7 +50,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"adam@example.com\",\r\n    \"password\": \"1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"shoponhossen@example.com\",\r\n    \"password\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -961,7 +961,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"shop\": 2,\r\n    \"name\": \"RTX 3080 TI\",\r\n    \"price\": 49000,\r\n    \"category\": \"gpu\"\r\n}",
+							"raw": "{\r\n    \"shop\": 2,\r\n    \"name\": \"RTX 3090 TI\",\r\n    \"price\": 49000,\r\n    \"category\": \"GPU\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1320,6 +1320,29 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/chat/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -1362,7 +1385,7 @@
 		},
 		{
 			"key": "access_token",
-			"value": "",
+			"value": "???",
 			"type": "string"
 		}
 	]
