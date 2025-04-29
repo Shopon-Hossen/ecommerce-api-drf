@@ -17,7 +17,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
     def save(self, *args, **kwargs):
-        self.name = self.name.capitalize()
+        self.name = self.name.lower()
         return super().save(*args, **kwargs)
     
     def __str__(self):

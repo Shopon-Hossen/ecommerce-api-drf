@@ -32,7 +32,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
                 "non_string_error": "Given 'category' must be an 'String'"
             })
         
-        category, created = Category.objects.get_or_create(name=category_data.capitalize())
+        category, created = Category.objects.get_or_create(name=category_data.lower())
 
         # Handel Shop
         user = self.request.user
