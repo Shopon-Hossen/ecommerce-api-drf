@@ -16,4 +16,6 @@ urlpatterns = [
 
     path('verify/', views.SendVerificationView.as_view(), name='send-verification'),
     path('verify/<str:token>/', views.ReceiveVerificationView.as_view(), name='receive-verification'),
+
+    path('request-???/', views.ReceiveVerificationView.as_view(), name='receive-verification'),
 ]
