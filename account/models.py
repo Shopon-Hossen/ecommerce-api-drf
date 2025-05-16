@@ -87,12 +87,3 @@ class User(AbstractBaseUser, PermissionsMixin):
             GinIndex(name="user_first_name_gin", fields=["first_name"], opclasses=["gin_trgm_ops"]),
             GinIndex(name="user_last_name_gin", fields=["last_name"], opclasses=["gin_trgm_ops"]),
         ]
-
-
-class RequestToVerify(models.Model):
-    user = models.OneToOneField(User, models.CASCADE)
-    accepted = models.BooleanField(default=False)
-    create_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.user

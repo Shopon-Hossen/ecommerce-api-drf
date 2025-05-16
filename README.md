@@ -184,8 +184,8 @@ You can test APIs with Postman client. just import `e_commerce.postman_collectio
 - [x] Add basic security hardening (input validation, permissions, rate limiting).
 - [x] Build product comment system (including replies).
 - [x] Implement user-to-shop owner real-time chat (via Django Channels).
-- [ ] Create "Request Verification" endpoint for users.
-- [ ] Create "Admin Accept Verification" endpoint for verified requests.
+- [x] Create "Request Verification" endpoint for users.
+- [x] Create "Admin Accept Verification" endpoint for verified requests.
 - [ ] Add real-time search recommendations (via Django Channels).
 - [ ] Add unit and integration tests using **Pytest** and **DRF Test framework**.
 - [ ] Learn how to Dockerize the project for easier deployment.

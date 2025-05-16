@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "notification",
     "comment",
     "chat",
+    "moderator",
 ]
 
 MIDDLEWARE = [

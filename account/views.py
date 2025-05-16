@@ -21,7 +21,7 @@ class UserRegisterView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response({"success": True, "message": "Check you're email to verify account"})
+        return Response({"success": True, "message": "Check you're email to verify account", "payload": serializer.data})
 
 
 class UserUpdateView(APIView):
@@ -103,3 +103,11 @@ class UserPasswordUpdateView(APIView):
         user.set_password(new_password)
         user.save()
         return Response({"success": True, "message": "Password changed successfully."}, status=200)
+
+
+class CurrentUserProfileView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user

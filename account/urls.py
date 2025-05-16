@@ -12,10 +12,9 @@ urlpatterns = [
     path('login/silent/', TokenRefreshView.as_view(), name='login-silent'),
     path('update/', views.UserUpdateView.as_view(), name='update'),
     path('update/password/', views.UserPasswordUpdateView.as_view(), name='update-password'),
+    path('profile/', views.CurrentUserProfileView.as_view(), name='profile'),
     path('profile/<int:pk>/', views.UserProfileView.as_view(), name='profile'),
 
     path('verify/', views.SendVerificationView.as_view(), name='send-verification'),
     path('verify/<str:token>/', views.ReceiveVerificationView.as_view(), name='receive-verification'),
-
-    path('request-???/', views.ReceiveVerificationView.as_view(), name='receive-verification'),
 ]

@@ -9,4 +9,5 @@ urlpatterns = [
     path('cart/', include("cart.urls")),
     path('notification/', include("notification.urls")),
     path('chat/', include("chat.urls")),
+    path('moderator/', include("moderator.urls")),
 ]

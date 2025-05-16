@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import RequestUserVerify
 
-# Register your models here.
+
+class RequestUserVerifyAdmin(admin.ModelAdmin):
+    ordering = ["create_at"]
+
+
+admin.site.register(RequestUserVerify, RequestUserVerifyAdmin)

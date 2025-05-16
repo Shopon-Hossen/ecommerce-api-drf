@@ -7,17 +7,16 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'email',
-                  'password', 'display_picture', 'is_verify')
+                  'password', 'display_picture', 'is_verify', 'is_active')
 
-        read_only_fields = ['id']
+        read_only_fields = ['id', 'is_active']
         # User cannot change their password and email
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate_display_picture(self, value):
         max_size_bytes = 1 * 1024 * 1024  # 1MB
         if value.size > max_size_bytes:
-            raise serializers.ValidationError(
-                "Image cannot be larger than 1MB.")
+            raise serializers.ValidationError("Image cannot be larger than 1MB.")
         return value
 
     def create(self, validated_data):
