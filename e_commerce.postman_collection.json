@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"ali@example.com\",\r\n    \"password\": \"1\",\r\n    \"first_name\": \"Ali\",\r\n    \"last_name\": \"Hossen\"\r\n}",
+							"raw": "{\r\n    \"email\": \"bot@example.com\",\r\n    \"password\": \"1\",\r\n    \"first_name\": \"Bot\",\r\n    \"last_name\": \"Hossen\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -196,6 +196,37 @@
 					"response": []
 				},
 				{
+					"name": "profile me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/account/profile/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "send-verification",
 					"request": {
 						"auth": {
@@ -252,6 +283,25 @@
 								"account",
 								"verify",
 								"<str:token>",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "request-user-verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/moderator/request-user-verify/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"moderator",
+								"request-user-verify",
 								""
 							]
 						}
@@ -1343,6 +1393,88 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Moderator",
+			"item": [
+				{
+					"name": "request-user-verify-list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/moderator/request-user-verify/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"moderator",
+								"request-user-verify",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/moderator/update-user/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"moderator",
+								"update-user",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_stuff\": true,\r\n    \"is_superuser\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/moderator/update-user/5/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"moderator",
+								"update-user",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
@@ -1385,7 +1517,7 @@
 		},
 		{
 			"key": "access_token",
-			"value": "???",
+			"value": "",
 			"type": "string"
 		}
 	]
